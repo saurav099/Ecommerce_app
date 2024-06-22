@@ -1,0 +1,50 @@
+version: '1'
+
+services:
+  user_service:
+    build: ./user_service
+    ports:
+      - "5001:5000"
+    depends_on:
+      - user_db
+
+  product_service:
+    build: ./product_service
+    ports:
+      - "5002:5000"
+    depends_on:
+      - product_db
+
+  order_service:
+    build: ./order_service
+    ports:
+      - "5003:5000"
+    depends_on:
+      - order_db
+
+  user_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: user_db
+    ports:
+      - "5432:5432"
+
+  product_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: product_db
+    ports:
+      - "5433:5432"
+
+  order_db:
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: order_db
+    ports:
+      - "5434:5432"
